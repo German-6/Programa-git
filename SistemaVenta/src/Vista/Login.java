@@ -1,10 +1,15 @@
 
 package Vista;
 
+import Modelo.LoginDAO;
+import Modelo.login;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
+    login lg = new login();
+    LoginDAO login = new LoginDAO();
 
   int xMouse, yMouse;
   
@@ -12,7 +17,21 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    public void validar(){
+        String correo = txtCorreo.getText();
+        String pass = String.valueOf(txtPass.getPassword());
+        if (!"".equals(correo) || !"".equals(pass)){
+            
+            lg = login.log(correo, pass);
+            if (lg.getCorreo()!= null && lg.getPass() != null){
+                Sistema sis = new Sistema();
+                sis.setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Correo o la Contraseña incorrecta");
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,7 +44,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        txtPassword = new javax.swing.JPasswordField();
+        txtPass = new javax.swing.JPasswordField();
         txtCorreo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -49,10 +68,15 @@ public class Login extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        txtPassword.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
-        txtPassword.setBorder(null);
+        txtPass.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(204, 204, 204));
+        txtPass.setBorder(null);
 
         txtCorreo.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
@@ -149,7 +173,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(txtCorreo)
                         .addComponent(jSeparator1)
-                        .addComponent(txtPassword)
+                        .addComponent(txtPass)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -168,7 +192,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -216,6 +240,10 @@ public class Login extends javax.swing.JFrame {
         exitbtn.setBackground(Color.white);
         exitTxt.setForeground(Color.black);
     }//GEN-LAST:event_exitTxtMouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        validar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,6 +294,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }
