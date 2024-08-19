@@ -1,0 +1,7 @@
+Sección productos:
+Registro de productos (funcional)
+Editar productos (funcional)
+Eliminar Productos (funcional)
+Listado de productos (funcional)
+Conexión con la base de datos (funcional)
+archivo Excel de productos (funcional)
